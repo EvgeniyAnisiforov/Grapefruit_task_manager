@@ -1,29 +1,16 @@
-CREATE ROLE db_admin WITH CREATEDB INHERIT NOLOGIN;
-GRANT ALL PRIVILEGES ON SCHEMA public TO db_admin;
-GRANT ALL PRIVILEGES ON DATABASE access_roles TO db_admin;
+Параметры соединения
+(!)name server: grapefruit
+(?)server address: localhost
+(?)port: 5432
+(!)maintenance database: task_manager
+(!)username: ilia
+(!)password: ilia
 
+API базы данных:
 
-CREATE USER sonia WITH PASSWORD 'sonia';
-GRANT db_admin TO sonia;
-
-
-
-
-
-GRANT db_admin TO sonia
-GRANT ALL ON SCHEMA public TO db_admin;
-GRANT CREATE ON SCHEMA public TO db_admin;
-GRANT USAGE ON SCHEMA public TO db_admin;
-GRANT ALL ON ALL TABLES IN SCHEMA public TO db_admin
-GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA public TO db_admin
-GRANT CONNECT ON DATABASE access_roles TO db_admin;
-ALTER ROLE sonia WITH INHERIT
-REVOKE postgres FROM db_admin
-GRANT postgres TO db_admin
-REVOKE ALL ON SCHEMA public FROM sonia;
-
-
-
-GRANT db_admin TO sonia;
-CREATE DATABASE task_manager
-ALTER DATABASE task_manager OWNER TO db_admin
+1. Регистрация.
+Вызов: SELECT registration(login, hash_passwd, name, surname)
+Параметры: строка(<=60) логин, строка(<=60) пароль, строка(<=50) имя, строка(<=50) фамилия
+Возвращаемое значение: boolean
+Вставка в таблицу Users, успешно если все ограничения столбцов соблюдаются(ничто не равно null, логин уникален),
+иначе false
