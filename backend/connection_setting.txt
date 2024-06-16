@@ -1,0 +1,16 @@
+Параметры соединения
+(!)name server: grapefruit
+(?)server address: localhost
+(?)port: 5432
+(!)maintenance database: task_manager
+(!)username: ilia
+(!)password: ilia
+
+API базы данных:
+
+1. Регистрация.
+Вызов: SELECT registration(login, hash_passwd, name, surname)
+Параметры: строка(<=60) логин, строка(<=60) пароль, строка(<=50) имя, строка(<=50) фамилия
+Возвращаемое значение: boolean
+Вставка в таблицу Users, успешно если все ограничения столбцов соблюдаются(ничто не равно null, логин уникален),
+иначе false
