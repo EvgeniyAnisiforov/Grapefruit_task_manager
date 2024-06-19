@@ -6,7 +6,7 @@ import './index.css'
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
-    <BrowserRouter basename='/Grapefruit_task_manager'>
+    <BrowserRouter basename='/Grapefruit_task_manager/'>
       <App />
     </BrowserRouter>
   </React.StrictMode>,
