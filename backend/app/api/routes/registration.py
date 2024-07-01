@@ -1,4 +1,5 @@
 from fastapi import APIRouter, Depends
+from app.dependencies.db import get_repository
 
 router = APIRouter(prefix="/auth", tags=["auth"])
 
@@ -8,6 +9,6 @@ router = APIRouter(prefix="/auth", tags=["auth"])
     description="Метод для пополнения базы запросов из существующего txt файла с патронами",
 )
 async def registration(
-
+        repo=Depends(get_repository)
 ):
-    return {'hello':'yes'}
+    return repo.authorize("ilia", "python")

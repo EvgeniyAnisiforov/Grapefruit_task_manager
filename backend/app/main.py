@@ -27,8 +27,10 @@ def create_application() -> FastAPI:
 app = create_application()
 
 if __name__ == "__main__":
+    #$env:PYTHONPATH="../"
+    #export PYTHONPATH="../" для починки путей из app
     uvicorn.run(
-        "backend.app.main:app",
+        "main:app",
         host=config.app.host,
         port=config.app.port,
         reload=False,
