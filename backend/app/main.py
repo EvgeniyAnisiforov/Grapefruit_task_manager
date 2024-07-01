@@ -1,10 +1,8 @@
-# from backend.app.api.routes.api import router as api_router
 import uvicorn
 from fastapi import FastAPI
 from starlette.middleware.cors import CORSMiddleware
 
-from api.routes.api import router as api_router
-
+from app.api.api_routes import router as api_router
 from backend.app.config import Config
 
 config = Config()
