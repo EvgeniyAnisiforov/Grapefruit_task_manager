@@ -1,5 +1,5 @@
-from backend.app.config import Config
-from backend.app.db.PostgreRepository import Database
+from app.config import Config
+from app.db.PostgreRepository import Database
 
 config = Config()
 

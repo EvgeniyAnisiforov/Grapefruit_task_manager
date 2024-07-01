@@ -10,4 +10,4 @@ router = APIRouter(prefix="/auth", tags=["auth"])
 async def registration(
 
 ):
-    pass
+    return {'hello':'yes'}
