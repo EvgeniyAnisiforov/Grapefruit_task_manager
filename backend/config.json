@@ -1,0 +1,18 @@
+{
+  "app": {
+    "title": "GrapeFruit",
+    "version": "0.0.1",
+    "description": "",
+    "host": "localhost",
+    "port": 8081,
+    "allowed_hosts": ["*"],
+    "api_prefix": "/api"
+  },
+  "postgres": {
+    "host": "localhost",
+    "port": 5432,
+    "db": "requests",
+    "user": "postgres",
+    "password": "admin"
+  }
+}
