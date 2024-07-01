@@ -7,7 +7,7 @@ router = APIRouter(prefix="/auth", tags=["auth"])
     path="/registration",
     description="Метод для пополнения базы запросов из существующего txt файла с патронами",
 )
-async def fill_ammo_txt(
+async def registration(
 
 ):
     pass
