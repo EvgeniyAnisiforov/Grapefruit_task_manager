@@ -30,7 +30,7 @@ if __name__ == "__main__":
     #$env:PYTHONPATH="../"
     #export PYTHONPATH="../" для починки путей из app
     uvicorn.run(
-        "main:app",
+        "app.main:app",
         host=config.app.host,
         port=config.app.port,
         reload=False,

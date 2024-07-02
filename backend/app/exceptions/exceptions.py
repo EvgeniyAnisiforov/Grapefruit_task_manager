@@ -13,3 +13,9 @@ class ValidationException(HTTPException):
         self.status_code = status.HTTP_400_BAD_REQUEST
         self.detail = message
 
+
+class AuthException(HTTPException):
+    def __init__(self, message: str):
+        self.status_code = status.HTTP_400_BAD_REQUEST
+        self.detail = message
+

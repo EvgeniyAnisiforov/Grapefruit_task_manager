@@ -1,11 +1,11 @@
 from app.config import Config
-from app.db.PostgreRepository import Database
+from app.db.PostgresRepository import PostgresRepository
 
 config = Config()
 
 
-def get_repository():
-    return Database(
+def get_postgres_repository():
+    return PostgresRepository(
         database=config.postgres.db,
         user=config.postgres.user,
         password=config.postgres.password,

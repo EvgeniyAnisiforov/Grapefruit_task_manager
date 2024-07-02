@@ -1,0 +1,30 @@
+from pydantic import BaseModel
+
+
+class TaskRequest(BaseModel):
+    user_id: int
+    task: str
+    level: str = '1'
+
+
+class TaskUpdateRequest(BaseModel):
+    task_id: int
+    task: str
+    level: str = '1'
+
+
+class TaskResponse(BaseModel):
+    id: int
+    task: str
+    status: str
+    level: str
+
+
+class TaskUpdateOrderRequest(BaseModel):
+    task_id_old: int
+    task_id_new: int
+
+
+class TaskUpdateStatusChangeRequest(BaseModel):
+    task_id_old: int
+    task_id_new: int = None

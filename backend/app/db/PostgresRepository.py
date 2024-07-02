@@ -2,8 +2,14 @@ import psycopg2
 from contextlib import contextmanager
 
 
-class Database:
-    def __init__(self, database, user, password, host='localhost', port=5432):
+class PostgresRepository:
+    def __init__(
+            self,
+            database,
+            user, password,
+            host='localhost',
+            port=5432
+    ):
         self.database = database
         self.user = user
         self.password = password
@@ -99,7 +105,7 @@ class Database:
                 result = cur.fetchone()[0]
                 return result
 
-    def change_task_category(self, id_task_old, id_task_new=None):
+    def change_task_status(self, id_task_old, id_task_new=None):
         with self.connect() as conn:
             with conn.cursor() as cur:
                 cur.execute(
@@ -111,29 +117,3 @@ class Database:
                 return result
 
 
-# Пример использования
-if __name__ == "__main__":
-    db = Database(database="grapefruit", user="postgres", password="admin", host='localhost', port=5432)
-
-    # # Регистрация нового пользователя
-    # print(db.create_user("new_user", "hashed_password", "John", "Doe"))
-
-    # Добавление новой задачи
-    # task_id = db.add_task(id_user=5, task="Новая задача", level='2')
-    # print(f"Task added with ID: {task_id}")
-    #
-    # Обновление задачи
-    # print(db.update_task(id_task=32, task="Обновленная задачаd", level='3'))
-    #
-    # # Получение информации по задачам пользователя
-    # kanban_info = db.get_kanban_info(id_user=5)
-    # print("Kanban info:", kanban_info)
-
-    # result = db.change_category(id_kanban_old=, id_kanban_new=20)
-    # print(f"Update Kanban Ord result: {result}")
-    #
-    # # # # Удаление задачи
-    # print(db.delete_task(37))
-
-    user_info = db.authorize("ilia", "python")
-    print(user_info)
