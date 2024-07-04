@@ -1,4 +1,5 @@
-from typing import List
+from collections import defaultdict
+from typing import List, Dict
 
 from app.db.PostgresRepository import PostgresRepository
 from app.exceptions.exceptions import NotFoundException, ValidationException
@@ -37,10 +38,15 @@ class KanbanService:
         else:
             raise NotFoundException('Task')
 
-    async def get_tasks_by_user_id(self, user_id: int) -> List[TaskResponse]:
+    async def get_tasks_by_user_id(self, user_id: int) -> Dict[str, List[TaskResponse]]:
         tasks = self.postgres_repository.get_tasks_by_user_id(id_user=user_id)
         if tasks:
-            return [TaskResponse(id=task[0], task=task[1], status=task[2], level=task[3]) for task in tasks]
+            grouped_tasks = defaultdict(list)
+            for task in tasks:
+                task_response = TaskResponse(id=task[0], task=task[1], status=task[2], level=task[3])
+                task_status = task_response.status
+                grouped_tasks[task_status].append(task_response)
+            return grouped_tasks
         else:
             raise NotFoundException('Tasks')
 
