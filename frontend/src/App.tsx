@@ -12,7 +12,7 @@ function App() {
     <Routes>
         <Route path="/" element={<Auth />} />
         <Route path="/reg" element={<Reg />} />
-        <Route path="/Kanban" element={<Kanban />} />
+        <Route path="/kanban" element={<Kanban />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
   )
