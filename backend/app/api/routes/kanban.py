@@ -1,4 +1,4 @@
-from typing import List
+from typing import List, Dict
 
 from fastapi import APIRouter, Depends
 
@@ -52,7 +52,7 @@ async def delete_task(
 @router.get(
     path="/tasks/{user_id}",
     description="Метод для получения задач пользователя",
-    response_model=List[TaskResponse]
+    response_model=Dict[str, List[TaskResponse]]
 )
 async def get_tasks_by_user_id(
         user_id: int,
