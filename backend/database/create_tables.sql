@@ -8,16 +8,31 @@ CREATE TABLE Users
 	login VARCHAR(60) NOT NULL UNIQUE,
 	hash_passwd VARCHAR(60) NOT NULL 
 )
+DROP TABLE Status
+CREATE TABLE Status
+(
+	id_status SERIAL PRIMARY KEY,
+	status VARCHAR(30) NOT NULL,
+	CONSTRAINT ch_status
+	CHECK(status IN ('задачи','в работе','выполнено','переходное состояние'))
+)
+INSERT INTO Status VALUES (-1, 'переходное состояние')
+SELECT * FROM STATUS
 DROP TABLE Kanban
 CREATE TABLE Kanban
 (
 	id_kanban SERIAL PRIMARY KEY,
 	id_user INTEGER NOT NULL,
 	task TEXT NOT NULL,
-	status VARCHAR(9) NOT NULL DEFAULT 'задачи',
+	status INTEGER NOT NULL DEFAULT 1,
 	level CHAR(1) NOT NULL DEFAULT '1',
+	ord INTEGER NOT NULL DEFAULT -1,
+	CONSTRAINT fk_status
+	FOREIGN KEY(status) REFERENCES Status(id_status),
+	CONSTRAINT u_ord_status 
+	UNIQUE(ord,status),
 	CONSTRAINT ch_status
-	CHECK(status IN ('задачи','в работе','выполнено')),
+	CHECK(status BETWEEN 1 AND 3),
 	CONSTRAINT ch_level
 	CHECK(level BETWEEN '1' AND '5'),
 	CONSTRAINT fk_id_user
@@ -26,6 +41,10 @@ CREATE TABLE Kanban
 ALTER TABLE Kanban ADD COLUMN ord INTEGER UNIQUE NOT NULL DEFAULT -1
 ALTER TABLE Kanban DROP CONSTRAINT kanban_ord_key
 ALTER TABLE Kanban ADD CONSTRAINT u_ord_status UNIQUE(ord,status)
+ALTER TABLE Status DROP CONSTRAINT ch_status
+ALTER TABLE Kanban ADD CONSTRAINT ch_status CHECK((status BETWEEN 1 AND 3) OR status = -1)
+ALTER TABLE Status ALTER COLUMN status DROP DEFAULT TYPE VARCHAR(30)
+ALTER TABLE Status ADD CONSTRAINT ch_status CHECK(status IN ('задачи','в работе','выполнено','переходное состояние'))
 
 DROP TABLE Matrix
 CREATE TABLE Matrix 
