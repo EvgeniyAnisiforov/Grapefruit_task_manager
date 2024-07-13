@@ -1,5 +1,5 @@
 --1 variant
-DROP FUNCTION authorization(_login VARCHAR(60),_passwd VARCHAR(60))
+DROP FUNCTION authorization(_login VARCHAR(60),_passwd VARCHAR(60));
 
 CREATE OR REPLACE FUNCTION authorization(_login VARCHAR(60),_passwd VARCHAR(60),
 										 OUT id_user INT, OUT name VARCHAR(50), OUT surname VARCHAR(50))
@@ -18,8 +18,8 @@ EXCEPTION
 END;
 $$ LANGUAGE plpgsql; 
 
-SELECT authorization('ilia4','python')  
+SELECT authorization('ilia4','python')  ;
 
 
 
-SELECT * FROM Users
+

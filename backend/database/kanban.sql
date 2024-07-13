@@ -134,7 +134,7 @@ BEGIN
 			IF ABS(new_status - old_status) > 1 THEN
 				RAISE EXCEPTION 'нарушение логики';
 			END IF;			
-			new_ord = COALESCE((SELECT MAX(ord) FROM Kanban WHERE status = new_status ), 1);
+			new_ord = COALESCE((SELECT MAX(ord)+1 FROM Kanban WHERE status = new_status ), 1);
 			OPEN cursor_update FOR
 			SELECT id_kanban FROM Kanban WHERE (status = old_status AND ord > old_ord) ORDER BY ord ASC;	
 			UPDATE Kanban SET ord = -1, status = -1 WHERE id_kanban = _id_kanban_old; --переходная позиция для изменяемого ord
@@ -197,7 +197,7 @@ $$ language plpgsql
 
 
 
-SELECT replace_task(10,-1)
+SELECT replace_task(6,-3)
 
 EXPLAIN ANALYZE INSERT INTO Kanban(id_user,task) VALUES(19,'ТРИГГЕР НА ВСТАВКУ');
 SELECT * FROM kanban ORDER BY STATUS, ORD
