@@ -3,7 +3,7 @@ from typing import List, Dict
 
 from app.db.PostgresRepository import PostgresRepository
 from app.exceptions.exceptions import NotFoundException, ValidationException
-from app.models.kanban import TaskResponse
+from app.models.kanban import Task, TaskResponse
 
 
 class KanbanService:
@@ -38,26 +38,19 @@ class KanbanService:
         else:
             raise NotFoundException('Task')
 
-    async def get_tasks_by_user_id(self, user_id: int) -> Dict[str, List[TaskResponse]]:
+    async def get_tasks_by_user_id(self, user_id: int) -> list[TaskResponse]:
         tasks = self.postgres_repository.get_tasks_by_user_id(id_user=user_id)
         if tasks:
             grouped_tasks = defaultdict(list)
             for task in tasks:
-                task_response = TaskResponse(id=task[0], task=task[1], status=task[2], level=task[3])
+                task_response = Task(id=task[0], task=task[1], status=task[2], level=task[3])
                 task_status = task_response.status
                 grouped_tasks[task_status].append(task_response)
-            return grouped_tasks
-        else:
-            raise NotFoundException('Tasks')
 
-    async def update_task_order(self, task_id_old: int, task_id_new: int) -> bool:
-        result = self.postgres_repository.update_task_ord(
-            id_task_old=task_id_old, id_task_new=task_id_new
-        )
-        if result:
+            result = [TaskResponse(status=status, tasks=task_list) for status, task_list in grouped_tasks.items()]
             return result
         else:
-            raise ValidationException('Order could not be updated(check params)')
+            raise NotFoundException('Tasks')
 
     async def change_task_status(self, task_id_old: int, task_id_new: int = None) -> bool:
         result = self.postgres_repository.change_task_status(
@@ -67,4 +60,3 @@ class KanbanService:
             return result
         else:
             raise ValidationException('Status could not be changed(check params)')
-

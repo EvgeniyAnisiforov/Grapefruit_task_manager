@@ -1,4 +1,5 @@
 from pydantic import BaseModel
+from typing_extensions import List
 
 
 class TaskRequest(BaseModel):
@@ -13,18 +14,19 @@ class TaskUpdateRequest(BaseModel):
     level: str = '1'
 
 
-class TaskResponse(BaseModel):
+class Task(BaseModel):
     id: int
     task: str
     status: str
     level: str
 
 
-class TaskUpdateOrderRequest(BaseModel):
-    task_id_old: int
-    task_id_new: int
+class TaskResponse(BaseModel):
+    status: str
+    tasks: List[Task]
 
 
 class TaskUpdateStatusChangeRequest(BaseModel):
     task_id_old: int
-    task_id_new: int = None
+    task_id_new: int
+

@@ -94,26 +94,13 @@ class PostgresRepository:
                 tasks = cur.fetchall()
                 return tasks
 
-    def update_task_ord(self, id_task_old, id_task_new):
-        with self.connect() as conn:
-            with conn.cursor() as cur:
-                cur.execute(
-                    "SELECT public.func_update_kanban_ord(%s, %s);",
-                    (id_task_old, id_task_new)
-                )
-                conn.commit()
-                result = cur.fetchone()[0]
-                return result
-
     def change_task_status(self, id_task_old, id_task_new=None):
         with self.connect() as conn:
             with conn.cursor() as cur:
                 cur.execute(
-                    "SELECT public.func_change_category(%s, %s);",
+                    "SELECT public.replace_task(%s, %s);",
                     (id_task_old, id_task_new)
                 )
                 result = cur.fetchone()[0]
                 conn.commit()
                 return result
-
-

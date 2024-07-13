@@ -3,8 +3,7 @@ from typing import List, Dict
 from fastapi import APIRouter, Depends
 
 from app.dependencies.services import get_kanban_service
-from app.models.kanban import TaskRequest, TaskResponse, TaskUpdateRequest, TaskUpdateStatusChangeRequest, \
-    TaskUpdateOrderRequest
+from app.models.kanban import TaskRequest, Task, TaskUpdateRequest, TaskUpdateStatusChangeRequest, TaskResponse
 
 router = APIRouter(prefix="/kanban", tags=["kanban"])
 
@@ -52,7 +51,7 @@ async def delete_task(
 @router.get(
     path="/tasks/{user_id}",
     description="Метод для получения задач пользователя",
-    response_model=Dict[str, List[TaskResponse]]
+    response_model=List[TaskResponse]
 )
 async def get_tasks_by_user_id(
         user_id: int,
@@ -60,20 +59,6 @@ async def get_tasks_by_user_id(
 ):
     tasks = await kanban_service.get_tasks_by_user_id(user_id)
     return tasks
-
-
-@router.put(
-    path="/task/update_order",
-    description="Метод для обновления порядка задач",
-)
-async def update_task_order(
-        request: TaskUpdateOrderRequest,
-        kanban_service=Depends(get_kanban_service)
-):
-    update_result = await kanban_service.update_task_order(
-        request.task_id_old, request.task_id_new
-    )
-    return {"success": update_result}
 
 
 @router.put(
@@ -88,3 +73,4 @@ async def change_task_status(
         request.task_id_old, request.task_id_new
     )
     return {"success": change_result}
+
