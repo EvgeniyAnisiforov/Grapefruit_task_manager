@@ -40,17 +40,17 @@ class KanbanService:
 
     async def get_tasks_by_user_id(self, user_id: int) -> list[TaskResponse]:
         tasks = self.postgres_repository.get_tasks_by_user_id(id_user=user_id)
-        if tasks:
-            grouped_tasks = defaultdict(list)
-            for task in tasks:
-                task_response = Task(id=task[0], task=task[1], status=task[2], level=task[3])
-                task_status = task_response.status
-                grouped_tasks[task_status].append(task_response)
+        grouped_tasks = defaultdict(list)
+        grouped_tasks['задачи'] = []
+        grouped_tasks['в работе'] = []
+        grouped_tasks['выполнено'] = []
+        for task in tasks:
+            task_response = Task(id=task[0], task=task[1], status=task[2], level=task[3])
+            task_status = task_response.status
+            grouped_tasks[task_status].append(task_response)
 
-            result = [TaskResponse(status=status, tasks=task_list) for status, task_list in grouped_tasks.items()]
-            return result
-        else:
-            raise NotFoundException('Tasks')
+        result = [TaskResponse(status=status, tasks=task_list) for status, task_list in grouped_tasks.items()]
+        return result
 
     async def change_task_status(self, task_id_old: int, task_id_new: int = None) -> bool:
         result = self.postgres_repository.change_task_status(
