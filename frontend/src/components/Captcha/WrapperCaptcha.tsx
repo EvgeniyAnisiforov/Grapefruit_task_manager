@@ -9,10 +9,9 @@ import {
   DragOverlay,
 } from "@dnd-kit/core"
 import {
-  arrayMove,
   SortableContext,
   sortableKeyboardCoordinates,
-  rectSortingStrategy,
+  rectSwappingStrategy,
 } from "@dnd-kit/sortable"
 import ItemsCaptcha from "./ItemsCaptcha"
 import {
@@ -60,13 +59,17 @@ const WrapperCaptcha: FC<PropsTypeWrapperCaptcha> = ({closeCaptcha, victoryCaptc
   const handleDragEnd = (event: any) => {
     setActiveId(null)
     const { active, over } = event
-
+  
     if (active.id !== over.id) {
       setItems((items) => {
         const oldIndex = items.findIndex((el) => el.id === active.id)
         const newIndex = items.findIndex((el) => el.id === over.id)
-
-        return arrayMove(items, oldIndex, newIndex)
+  
+        const newItems = [...items]
+        newItems[oldIndex] = items[newIndex]
+        newItems[newIndex] = items[oldIndex]
+  
+        return newItems
       })
     }
   }
@@ -97,7 +100,7 @@ const WrapperCaptcha: FC<PropsTypeWrapperCaptcha> = ({closeCaptcha, victoryCaptc
       </div>
 
       <div className="w-[460px] h-[460px] flex flex-wrap border-slate-700 border-[1px]">
-        <SortableContext items={items} strategy={rectSortingStrategy}>
+        <SortableContext items={items} strategy={rectSwappingStrategy}>
           {items.map((el) => (
             <ItemsCaptcha key={el.id} id={el.id} img={el.img} handle={true} />
           ))}

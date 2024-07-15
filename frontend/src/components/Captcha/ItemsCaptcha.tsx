@@ -20,13 +20,14 @@ const ItemsCaptcha: FC<PropsItemCaptcha> = ({ id, img }) => {
 
   const style = {
     transform: CSS.Transform.toString(transform),
-    transition,
+    transition: transition ? `transform 0.2s ease-in-out` : undefined, // Добавляем transition для плавного перехода
     width: "150px",
     height: "150px",
     margin: "1px",
     zIndex: isDragging ? "100" : "auto",
     opacity: isDragging ? 0.3 : 1,
   }
+
   return (
     <div ref={setNodeRef} style={style}>
       <img
