@@ -41,15 +41,8 @@ const DragEndHandler: FC<DragEndHandlerProps> = ({
       const destinationCol = data[destinationColIndex]
 
       const destinationTasks = [...destinationCol.tasks]
-
-      // const [deleteTask] = useDeleteDataTaskMutation()
-      // deleteTask(sourceCol.tasks[source.index].id)
-      console.log(destinationTasks)
-      console.log(destination.index)
-
-
-      if(destinationCol.tasks.length == 0){
-        console.log('пусто')
+      
+      if(destinationTasks.length === destination.index || destinationCol.tasks.length == 0){
         if(destinationCol.status == 'задачи'){
           change_status({task_id_old: sourceCol.tasks[source.index].id, task_id_new: -1})
           return
@@ -63,19 +56,8 @@ const DragEndHandler: FC<DragEndHandlerProps> = ({
           return
         }
       }
-
-      change_status({task_id_old: sourceCol.tasks[source.index].id, task_id_new: destinationTasks[destination.index].id})
       
-      // const newData = data.map((col) => {
-      //   if (col.status === source.droppableId) {
-      //     return { ...col, tasks: sourceTasks }
-      //   } else if (col.status === destination.droppableId) {
-      //     return { ...col, tasks: destinationTasks }
-      //   }
-      //   return col
-      // })
-
-      // setDataKanban(newData)
+      change_status({task_id_old: sourceCol.tasks[source.index].id, task_id_new: destinationTasks[destination.index].id})
     }
   }
 

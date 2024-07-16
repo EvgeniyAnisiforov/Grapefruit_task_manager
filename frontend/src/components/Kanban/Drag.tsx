@@ -24,6 +24,7 @@ const Drag: FC<PropsTypeDrag> = ({ task, index, bg }) => {
   const [visibleModalWindow, setVisibleModalWindow] = useState<boolean>(false);
   const [deleteTask] = useDeleteDataTaskMutation()
   const [updateTask] = useUpdateTaskMutation()
+
   const handleDelete = () => {
     deleteTask(task.id)
   }
