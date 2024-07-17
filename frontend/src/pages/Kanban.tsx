@@ -27,7 +27,6 @@ const Kanban: FC<{}> = () => {
   const id = useAppSelector((status) => status.statusAuth.value.id);
   const [addDataTask] = useAddDataTaskMutation()
   const { data = [] } = useGetDataKanbanQuery(id);
-  console.log(data)
 
   const addTask = (e: Task) => {
     addDataTask({user_id: e.id, task: e.task, level: e.level})
@@ -40,7 +39,7 @@ const Kanban: FC<{}> = () => {
           <div className="w-[95%] h-full flex justify-center ml-auto mr-auto">
             <DragEndHandler data={data}>
               {data.map((section: Section) => (
-                <Drop section={section}>
+                <Drop key={section.status} section={section}>
                   {section.tasks.map((task, index) => (
                     <Drag
                       key={task.id.toString()}
