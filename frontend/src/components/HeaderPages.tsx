@@ -20,7 +20,7 @@ const HeaderPages: FC<PropsType> = ({children}) => {
                     <div className='p-1'><Settings className='text-white w-10 h-10'/></div>
                 </div>
                 <div className='flex items-center pr-7'>
-                    <h2 className='text-white text-2xl'>{nameUser.surname + ' ' + nameUser.name}</h2>
+                    <h2 className='text-white text-2xl'>{(nameUser.surname[0].toUpperCase() + nameUser.surname.slice(1)) + ' ' + (nameUser.name[0].toUpperCase() + nameUser.name.slice(1))}</h2>
                     <LogOut onClick={()=>dispatch(setStatusAuth({ status: false, id: '', name: '', surname: '' }))} className="ml-5 w-8 h-8 text-white cursor-pointer hover:h-9 hover:w-9"/>
                 </div>
             </div>

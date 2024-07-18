@@ -33,7 +33,7 @@ const Drop: FC<TypePropsDrop> = ({ section, children }) => {
           }`}
         >
           <p className="text-3xl border-b-2 border-solid border-black w-52 mr-auto ml-auto pb-2">
-            {section.status}
+            {section.status[0].toUpperCase() + section.status.slice(1)}
           </p>
           <div
             className=" w-[100%] max-h-[85%] mt-7 ml-auto mr-auto flex flex-wrap justify-center gap-2.5 overflow-y-auto"
