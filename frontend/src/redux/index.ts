@@ -14,6 +14,7 @@ import { AuthApi } from "./API/AuthApi"
 import { RegApi } from "./API/RegApi"
 import { KanbanApi } from "./API/KanbanApi"
 import statusAuthSlice from "./statusAuth-slice"
+import themeColorSlice from "./themeColor-slice"
 import { CaptchaApi } from "./API/CaptchaApi"
 
 const rootReducer = combineReducers({
@@ -22,6 +23,7 @@ const rootReducer = combineReducers({
   [KanbanApi.reducerPath]: KanbanApi.reducer,
   [CaptchaApi.reducerPath]: CaptchaApi.reducer,
   statusAuth: statusAuthSlice,
+  themeColor: themeColorSlice,
 })
 
 const persistConfig = {

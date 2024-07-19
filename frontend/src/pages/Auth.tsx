@@ -2,7 +2,7 @@ import { FC } from "react"
 import { useNavigate } from "react-router-dom"
 import { usePostAuthMutation } from "../redux/API/AuthApi"
 import { useForm, SubmitHandler } from "react-hook-form"
-import { useAppDispatch } from "../redux/hook"
+import { useAppDispatch, useAppSelector } from "../redux/hook"
 import { setStatusAuth } from "../redux/statusAuth-slice"
 import InputValidation from "../components/InputValidation"
 
@@ -13,6 +13,7 @@ interface LoginDataType {
 
 const Auth: FC<{}> = () => {
   const dispatch = useAppDispatch()
+  const color = useAppSelector(state=> state.themeColor.value)
   const [login] = usePostAuthMutation()
 
   const navigate = useNavigate()
@@ -49,7 +50,7 @@ const Auth: FC<{}> = () => {
 
   return (
     <div className="w-screen h-screen">
-      <div className="w-full h-full bg-gradient-to-l from-red-500 to-orange-500 flex justify-center items-center">
+      <div className={`w-full h-full ${color} flex justify-center items-center`}>
         <div className="pb-[100px]">
           <h1 className="text-5xl text-white max-[1500px]:text-4xl max-[400px]:text-3xl">
             Авторизация

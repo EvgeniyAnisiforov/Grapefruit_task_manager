@@ -5,6 +5,7 @@ import { usePostRegMutation } from "../redux/API/RegApi"
 import ModalWindow from "../components/ModalWindow"
 import WrapperCaptcha from "../components/Captcha/WrapperCaptcha"
 import InputValidation from "../components/InputValidation"
+import { useAppSelector } from "../redux/hook"
 
 type PasswordDataType = {
   name: string
@@ -15,6 +16,7 @@ type PasswordDataType = {
 
 const Reg: FC<{}> = () => {
   const [reg] = usePostRegMutation()
+  const color = useAppSelector(state=>state.themeColor.value)
   const navigate = useNavigate()
   const goAuth = () => navigate("/")
   const [visibleCaptcha, setVisibleCaptcha] = useState<boolean>(false)
@@ -46,7 +48,7 @@ const Reg: FC<{}> = () => {
 
   return (
     <div className="w-screen h-screen">
-      <div className="w-full h-full bg-gradient-to-l from-red-500 to-orange-500 flex justify-center items-center">
+      <div className={`w-full h-full ${color} flex justify-center items-center`}>
         <div className="pb-[100px]">
           <h1 className="text-5xl text-white max-[1500px]:text-4xl max-[400px]:text-3xl">
             Регистрация
