@@ -26,6 +26,10 @@ const ItemsCaptcha: FC<PropsItemCaptcha> = ({ id, img }) => {
     margin: "1px",
     zIndex: isDragging ? "100" : "auto",
     opacity: isDragging ? 0.3 : 1,
+    ...(window.innerWidth <= 1400 && {
+      width: "100px",
+      height: "100px",
+    }),
   }
 
   return (
@@ -33,7 +37,7 @@ const ItemsCaptcha: FC<PropsItemCaptcha> = ({ id, img }) => {
       <img
         {...listeners}
         {...attributes}
-        className="w-[150px] h-[150px] m-[1px] border-slate-950 border-[1px] cursor-grab"
+        className="w-[150px] h-[150px] m-[1px] border-slate-950 border-[1px] cursor-grab max-[1400px]:w-[100px] max-[1400px]:h-[100px]"
         id={id}
         src={img}
       />

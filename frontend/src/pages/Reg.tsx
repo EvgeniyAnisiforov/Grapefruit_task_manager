@@ -89,8 +89,8 @@ const Reg: FC<{}> = () => {
         {visibleCaptcha && (
           <ModalWindow
             onClick={() => setVisibleCaptcha(false)}
-            width="w-[700px]"
-            height="h-[700px]"
+            width="w-[700px] max-[1400px]:w-[500px]"
+            height="h-[700px] max-[1400px]:h-[500px]"
             items="items-center"
           >
             <WrapperCaptcha closeCaptcha={()=>setVisibleCaptcha(false)} victoryCaptcha={()=> setVictoryCaptcha(true)}/>

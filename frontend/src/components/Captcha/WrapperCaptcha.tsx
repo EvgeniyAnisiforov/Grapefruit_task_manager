@@ -78,9 +78,7 @@ const WrapperCaptcha: FC<PropsTypeWrapperCaptcha> = ({closeCaptcha, victoryCaptc
     const str = items
       .map((el) => el.id)
       .reduce((acc, current) => acc + current, "")
-    console.log(str)
     strIdCaptcha({ captcha_code: str }).then((result) => {
-      console.log(result.data) // Доступ к данным ответа
       if(result.data === true){
         closeCaptcha()
         victoryCaptcha()
@@ -95,18 +93,18 @@ const WrapperCaptcha: FC<PropsTypeWrapperCaptcha> = ({closeCaptcha, victoryCaptc
       onDragEnd={handleDragEnd}
       onDragStart={handleDragStart}
     >
-      <div className="absolute top-14 left-1/4 right-1/4">
+      <div className="absolute top-14 max-[1400px]:top-10">
         <h1 className="text-2xl">Собери рисунок грейфрута</h1>
       </div>
 
-      <div className="w-[460px] h-[460px] flex flex-wrap border-slate-700 border-[1px]">
+      <div className="w-[460px] h-[460px] flex flex-wrap border-slate-700 border-[1px] max-[1400px]:w-[310px] max-[1400px]:h-[310px]">
         <SortableContext items={items} strategy={rectSwappingStrategy}>
           {items.map((el) => (
             <ItemsCaptcha key={el.id} id={el.id} img={el.img} handle={true} />
           ))}
           <DragOverlay>
             {activeId ? (
-              <div className="w-[150px] h-[150px] cursor-grabbing">
+              <div className="w-[150px] h-[150px] cursor-grabbing max-[1400px]:w-[100px] max-[1400px]:h-[100px]">
                 <ItemsCaptcha
                   key={activeId}
                   id={activeId}

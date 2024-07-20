@@ -35,7 +35,7 @@ const Kanban: FC<{}> = () => {
   return (
     <>
       <HeaderPages>
-        <div className="flex justify-center items-center h-[70%] m-10">
+        <div className="flex justify-center items-center h-[70%] m-5">
           <div className="w-[95%] h-full flex justify-center ml-auto mr-auto">
             <DragEndHandler data={data}>
               {data.map((section: Section) => (
@@ -65,7 +65,7 @@ const Kanban: FC<{}> = () => {
         <div className="flex justify-center">
           <SquarePlus
             onClick={() => setVisibleModalWindow(true)}
-            className="text-white w-16 h-16 mt-3 cursor-pointer"
+            className="absolute bottom-4 text-white w-16 h-16 mt-3 cursor-pointer"
           />
         </div>
       </HeaderPages>

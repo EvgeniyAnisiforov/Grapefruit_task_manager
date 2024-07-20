@@ -45,7 +45,7 @@ const Drag: FC<PropsTypeDrag> = ({ task, index, bg }) => {
               ...provided.draggableProps.style,
               opacity: snapshot.isDragging ? "0.5" : "1",
             }}
-            className={`w-[100%] h-[70px] ${bg} rounded-xl flex justify-between items-center  cursor-grab`}
+            className={`w-[100%] h-[60px] ${bg} rounded-xl flex justify-between items-center  cursor-grab`}
           >
             <div className="flex items-center ml-4">
               <p className="text-lg">{task.level}</p>
@@ -57,8 +57,8 @@ const Drag: FC<PropsTypeDrag> = ({ task, index, bg }) => {
                   task.task.substring(0, 1).toUpperCase() + task.task.substring(1)
                 ).substring(0, 75) + "..."}
             <div className="flex">
-              <Pencil onClick={()=> setVisibleModalWindow(true)}/>
-              <Trash2 onClick={handleDelete} className="ml-1 mr-4 cursor-pointer hover:w-7 hover:h-7" />
+              <Pencil className="cursor-pointer" onClick={()=> setVisibleModalWindow(true)}/>
+              <Trash2 onClick={handleDelete} className="ml-1 mr-4 cursor-pointer" />
             </div>
           </div>
         )}

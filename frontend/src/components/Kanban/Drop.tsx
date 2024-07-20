@@ -24,7 +24,7 @@ const Drop: FC<TypePropsDrop> = ({ section, children }) => {
         <div
           {...provided.droppableProps}
           ref={provided.innerRef}
-          className={`w-[100%] h-full bg-[#ffffff] p-5 ${
+          className={`w-[100%] h-[95%] bg-[#ffffff] p-5 ${
             section.status === "выполнено"
               ? "rounded-tr-3xl rounded-br-3xl border-l-2 border-solid border-black"
               : section.status === "задачи"
