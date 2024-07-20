@@ -6,7 +6,8 @@ class PostgresRepository:
     def __init__(
             self,
             database,
-            user, password,
+            user,
+            password,
             host='localhost',
             port=5432
     ):

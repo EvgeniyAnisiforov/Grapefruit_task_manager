@@ -1,0 +1,22 @@
+[run]
+branch = True
+source =
+    app
+omit =
+    utils/test_*.py
+
+
+[report]
+show_missing = True
+skip_covered = True
+exclude_lines =
+    # Have to re-enable the standard pragma
+    pragma: no cover
+
+    # Don't complain about missing debug-only code:
+    def __repr__
+    if self\.debug
+
+    # Don't complain if tests don't hit defensive assertion code:
+    raise AssertionError
+    raise NotImplementedError
